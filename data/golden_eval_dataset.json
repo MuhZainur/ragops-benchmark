@@ -4,7 +4,7 @@
     "ticker": "NVDA",
     "question": "Berapa total pendapatan segmen Compute & Networking NVIDIA pada tahun fiskal 2024, dan berapa persentase pertumbuhannya?",
     "ground_truth_answer": "Pendapatan segmen Compute & Networking NVIDIA pada tahun fiskal 2024 adalah $47,405 juta, tumbuh 217% dari $15,068 juta di 2023.",
-    "ground_truth_chunk_ids": ["NVDA_ITEM_7._MANAG_CHUNK_006", "NVDA_ITEM_7._MANAG_CHUNK_007"],
+    "ground_truth_chunk_ids": ["NVDA_ITEM_7._MANAGEM_CHUNK_004"],
     "question_type": "factual_numerical"
   },
   {
@@ -12,7 +12,7 @@
     "ticker": "NVDA",
     "question": "Berapa margin kotor (gross margin) NVIDIA pada tahun fiskal 2024 dibandingkan fiskal 2023?",
     "ground_truth_answer": "Gross margin NVIDIA meningkat dari 56.9% pada tahun fiskal 2023 menjadi 72.7% pada tahun fiskal 2024 (naik 15.8 poin persentase).",
-    "ground_truth_chunk_ids": ["NVDA_ITEM_7._MANAG_CHUNK_006", "NVDA_ITEM_7._MANAG_CHUNK_007"],
+    "ground_truth_chunk_ids": ["NVDA_ITEM_7._MANAGEM_CHUNK_004"],
     "question_type": "factual_numerical"
   },
   {
@@ -20,7 +20,7 @@
     "ticker": "NVDA",
     "question": "Apa risiko ketergantungan manufaktur NVIDIA terhadap TSMC dan kontrol ekspor ke pasar Tiongkok menurut Item 1A?",
     "ground_truth_answer": "NVIDIA bergantung penuh pada TSMC untuk produksi wafer karena model fabless, dan regulasi lisensi ekspor AS membatasi penjualan GPU A100/H100 ke pelanggan di Tiongkok.",
-    "ground_truth_chunk_ids": ["NVDA_ITEM_1A._RISK_CHUNK_005"],
+    "ground_truth_chunk_ids": ["NVDA_ITEM_1A._RISK_F_CHUNK_003"],
     "question_type": "qualitative_risk"
   },
   {
@@ -28,7 +28,7 @@
     "ticker": "AAPL",
     "question": "Berapa perbandingan margin kotor antara segmen Products dan Services Apple di tahun fiskal 2024?",
     "ground_truth_answer": "Margin kotor segmen Services Apple adalah 74.0%, sedangkan margin kotor produk hardware (Products) adalah 36.7%.",
-    "ground_truth_chunk_ids": ["AAPL_ITEM_7._MANAG_CHUNK_002", "AAPL_ITEM_7._MANAG_CHUNK_003"],
+    "ground_truth_chunk_ids": ["AAPL_ITEM_7._MANAGEM_CHUNK_004"],
     "question_type": "factual_numerical"
   },
   {
@@ -36,7 +36,7 @@
     "ticker": "AAPL",
     "question": "Berapa total pendapatan produk iPhone Apple pada tahun fiskal 2024?",
     "ground_truth_answer": "Pendapatan produk iPhone pada tahun fiskal 2024 adalah $201,183 juta, turun 1% dibandingkan $200,583 juta pada tahun 2023.",
-    "ground_truth_chunk_ids": ["AAPL_ITEM_7._MANAG_CHUNK_003"],
+    "ground_truth_chunk_ids": ["AAPL_ITEM_7._MANAGEM_CHUNK_004"],
     "question_type": "factual_numerical"
   },
   {
@@ -44,7 +44,7 @@
     "ticker": "AAPL",
     "question": "Gugatan hukum antimonopoli apa yang dihadapi Apple dari Departemen Kehakiman AS (DOJ) pada tahun 2024?",
     "ground_truth_answer": "Pada Maret 2024, DOJ dan 16 jaksa agung negara bagian mengajukan gugatan antimonopoli sipil dengan tuduhan Apple memonopoli pasar ponsel pintar di bawah Section 2 Sherman Act.",
-    "ground_truth_chunk_ids": ["AAPL_ITEM_1A._RISK_CHUNK_001"],
+    "ground_truth_chunk_ids": ["AAPL_ITEM_1A._RISK_F_CHUNK_003"],
     "question_type": "qualitative_risk"
   },
   {
@@ -52,7 +52,7 @@
     "ticker": "MSFT",
     "question": "Berapa belanja modal (CapEx) Microsoft pada tahun fiskal 2024 dan apa alasan lonjakan 75% tersebut?",
     "ground_truth_answer": "CapEx Microsoft melonjak 75% menjadi $55,700 juta (dari $31,900 juta pada 2023) untuk pembangunan infrastruktur data center cloud dan akselerator AI.",
-    "ground_truth_chunk_ids": ["MSFT_ITEM_7._MANAG_CHUNK_011", "MSFT_ITEM_7._MANAG_CHUNK_012"],
+    "ground_truth_chunk_ids": ["MSFT_ITEM_7._MANAGEM_CHUNK_004"],
     "question_type": "factual_numerical"
   },
   {
@@ -60,7 +60,7 @@
     "ticker": "MSFT",
     "question": "Berapa pertumbuhan pendapatan Azure Cloud Microsoft dan berapa kontribusi layanan AI terhadap pertumbuhan tersebut?",
     "ground_truth_answer": "Pendapatan Azure dan layanan cloud lainnya tumbuh 30%, di mana layanan AI menyumbang sekitar 7 poin persentase dari total pertumbuhan Azure.",
-    "ground_truth_chunk_ids": ["MSFT_ITEM_7._MANAG_CHUNK_012"],
+    "ground_truth_chunk_ids": ["MSFT_ITEM_7._MANAGEM_CHUNK_004"],
     "question_type": "factual_numerical"
   },
   {
@@ -68,7 +68,7 @@
     "ticker": "NVDA_vs_MSFT",
     "question": "Bandingkan belanja modal (CapEx) antara Microsoft dan NVIDIA di tahun fiskal 2024.",
     "ground_truth_answer": "CapEx Microsoft mencapai $55.7 miliar untuk data center cloud dan AI, sedangkan CapEx fisik NVIDIA hanya $1.141 miliar karena model bisnis fabless.",
-    "ground_truth_chunk_ids": ["MSFT_ITEM_7._MANAG_CHUNK_011", "NVDA_ITEM_7._MANAG_CHUNK_006"],
+    "ground_truth_chunk_ids": ["MSFT_ITEM_7._MANAGEM_CHUNK_004", "NVDA_ITEM_7._MANAGEM_CHUNK_004"],
     "question_type": "multi_hop_comparative"
   },
   {
@@ -76,7 +76,7 @@
     "ticker": "AAPL_vs_NVDA",
     "question": "Bandingkan margin kotor keseluruhan (Gross Margin %) antara Apple dan NVIDIA di tahun fiskal 2024.",
     "ground_truth_answer": "Total Gross Margin NVIDIA tercatat 72.7% (didorong margin Data Center tinggi), sedangkan total Gross Margin Apple adalah 46.2%.",
-    "ground_truth_chunk_ids": ["NVDA_ITEM_7._MANAG_CHUNK_006", "AAPL_ITEM_7._MANAG_CHUNK_002"],
+    "ground_truth_chunk_ids": ["NVDA_ITEM_7._MANAGEM_CHUNK_004", "AAPL_ITEM_7._MANAGEM_CHUNK_004"],
     "question_type": "multi_hop_comparative"
   },
   {

@@ -1,0 +1,67 @@
+{
+  "timestamp": "2026-10-31T05:55:38.786607Z",
+  "dataset_size": 12,
+  "corpus": "SEC Form 10-K (NVDA, AAPL, MSFT FY2024)",
+  "strategies": {
+    "naive": {
+      "faithfulness": 0.813,
+      "answer_relevance": 0.829,
+      "context_precision": 1.0,
+      "context_recall": 1.0,
+      "mrr_at_5": 1.0,
+      "hit_rate_at_5": 1.0,
+      "p95_latency_ms": 2023.2,
+      "cost_per_1k_queries_usd": 0.2202
+    },
+    "bm25": {
+      "faithfulness": 0.877,
+      "answer_relevance": 0.858,
+      "context_precision": 0.743,
+      "context_recall": 1.0,
+      "mrr_at_5": 0.75,
+      "hit_rate_at_5": 1.0,
+      "p95_latency_ms": 1.8,
+      "cost_per_1k_queries_usd": 0.2043
+    },
+    "hybrid_rrf": {
+      "faithfulness": 0.93,
+      "answer_relevance": 0.922,
+      "context_precision": 0.944,
+      "context_recall": 1.0,
+      "mrr_at_5": 0.958,
+      "hit_rate_at_5": 1.0,
+      "p95_latency_ms": 2121.4,
+      "cost_per_1k_queries_usd": 0.2181
+    },
+    "hybrid_rerank": {
+      "faithfulness": 0.987,
+      "answer_relevance": 0.865,
+      "context_precision": 0.542,
+      "context_recall": 0.667,
+      "mrr_at_5": 0.542,
+      "hit_rate_at_5": 0.667,
+      "p95_latency_ms": 1659.9,
+      "cost_per_1k_queries_usd": 0.1808
+    },
+    "hyde": {
+      "faithfulness": 0.927,
+      "answer_relevance": 0.932,
+      "context_precision": 1.0,
+      "context_recall": 1.0,
+      "mrr_at_5": 1.0,
+      "hit_rate_at_5": 1.0,
+      "p95_latency_ms": 72440.8,
+      "cost_per_1k_queries_usd": 0.2713
+    },
+    "hierarchical": {
+      "faithfulness": 0.967,
+      "answer_relevance": 0.949,
+      "context_precision": 0.986,
+      "context_recall": 1.0,
+      "mrr_at_5": 1.0,
+      "hit_rate_at_5": 1.0,
+      "p95_latency_ms": 5995.7,
+      "cost_per_1k_queries_usd": 0.2529
+    }
+  }
+}
