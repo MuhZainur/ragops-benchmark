@@ -39,7 +39,7 @@ import {
 } from 'recharts';
 
 // API Base URL - defaults to Render production backend if deployed, or localhost/relative
-const API_BASE_URL = import.meta.env.VITE_API_URL || '';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://ragops-benchmark.onrender.com';
 
 // Available Strategies Metadata
 const STRATEGIES = [
