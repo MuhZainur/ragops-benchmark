@@ -45,13 +45,8 @@ class FlashRankReranker:
         ranked_results = self.ranker.rerank(rerank_req)
 
         reranked_chunks: List[RetrievedChunk] = []
-        for item in ranked_results:
+        for item in ranked_results[:top_n]:
             score = round(float(item["score"]), 4)
-            
-            # Apply relevance cutoff threshold to drop noise
-            if score < threshold and len(reranked_chunks) >= 2:
-                continue
-                
             reranked_chunks.append(RetrievedChunk(
                 chunk_id=item["id"],
                 content=item["text"],
@@ -64,4 +59,4 @@ class FlashRankReranker:
                 }
             ))
 
-        return reranked_chunks[:top_n]
+        return reranked_chunks
