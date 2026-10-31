@@ -172,37 +172,19 @@ export default function App() {
       setResult(data);
     } catch (err) {
       console.error(`Error querying ${strategy}:`, err);
-      // Resilient fallback client simulation if server sleeping
       setResult({
         query: query,
         strategy: strategy,
-        answer: strategy === 'hybrid_rerank'
-          ? `Berdasarkan dokumen resmi SEC Form 10-K NVIDIA FY2024 (Item 7 MD&A), pendapatan segmen Compute & Networking tercatat sebesar $47,405 juta, melonjak drastis sebesar 217% dibandingkan FY2023 ($15,068 juta), didorong oleh adopsi masif arsitektur GPU Hopper HGX.`
-          : `Segmen Compute & Networking NVIDIA pada tahun fiskal 2024 menghasilkan pendapatan signifikan sekitar $47.4 miliar berkat permintaan AI accelerator.`,
-        citations: ['[NVDA_ITEM_7._MANAGEME_PARENT_004]', '[Item 7 MD&A]'],
-        retrieved_chunks: [
-          {
-            chunk_id: 'NVDA_ITEM_7_CHUNK_042',
-            score: strategy === 'hybrid_rerank' ? 0.9421 : 0.7812,
-            retriever_origin: strategy === 'hybrid_rerank' ? 'flashrank_cross_encoder' : 'dense_cosine',
-            metadata: { ticker: 'NVDA', section: 'ITEM 7. MD&A' },
-            content: 'Compute & Networking revenue was $47,405 million for fiscal year 2024, up 217% from fiscal year 2023, primarily driven by strong demand for the NVIDIA HGX platform and Hopper architecture.'
-          },
-          {
-            chunk_id: 'NVDA_CONSOLIDATED_REV_088',
-            score: strategy === 'hybrid_rerank' ? 0.8845 : 0.7410,
-            retriever_origin: 'sparse_bm25',
-            metadata: { ticker: 'NVDA', section: 'ITEM 8. FINANCIAL STATEMENTS' },
-            content: 'Total revenue for fiscal year 2024 was $60,922 million, an increase of 126% compared to $26,974 million in fiscal year 2023.'
-          }
-        ],
+        answer: `⚠️ Gagal menghubungi server backend (${err.message || 'Koneksi Terputus'}). Server Render kemungkinan sedang cold-start atau mengalami timeout. Silakan klik tombol 'Run Query' kembali setelah beberapa detik.`,
+        citations: [],
+        retrieved_chunks: [],
         latency_breakdown: {
-          retrieval_ms: strategy === 'hybrid_rerank' ? 42.1 : 35.4,
-          rerank_ms: strategy === 'hybrid_rerank' ? 18.5 : 0.0,
-          generation_ms: 380.2,
-          total_ms: strategy === 'hybrid_rerank' ? 440.8 : 415.6
+          retrieval_ms: 0,
+          rerank_ms: 0,
+          generation_ms: 0,
+          total_ms: 0
         },
-        estimated_cost_usd: 0.000094
+        estimated_cost_usd: 0.0
       });
     } finally {
       setLoading(false);
