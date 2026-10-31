@@ -34,6 +34,7 @@ data/raw/
 *.pkl
 *.parquet
 qdrant_storage/
+.flashrank_cache/
 
 # Node / Frontend
 frontend/node_modules/

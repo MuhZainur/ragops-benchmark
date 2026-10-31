@@ -1,52 +1,98 @@
 [
   {
-    "id": "SEC-NVDA-2024-001",
+    "id": "SEC-NVDA-01",
     "ticker": "NVDA",
-    "fiscal_year": "2024",
-    "question": "Berapa total pendapatan segmen Compute & Networking NVIDIA pada tahun fiskal 2024, dan berapa persentase pertumbuhannya dibanding 2023?",
-    "ground_truth_answer": "Pendapatan segmen Compute & Networking NVIDIA pada tahun fiskal 2024 adalah $47,405 juta, tumbuh 217% dibandingkan dengan $15,068 juta pada tahun fiskal 2023.",
-    "ground_truth_chunk_ids": ["NVDA_2024_ITEM7_CHUNK_42"],
-    "question_type": "factual_numerical",
-    "expected_difficulty": "medium"
+    "question": "Berapa total pendapatan segmen Compute & Networking NVIDIA pada tahun fiskal 2024, dan berapa persentase pertumbuhannya?",
+    "ground_truth_answer": "Pendapatan segmen Compute & Networking NVIDIA pada tahun fiskal 2024 adalah $47,405 juta, tumbuh 217% dari $15,068 juta di 2023.",
+    "ground_truth_chunk_ids": ["NVDA_ITEM_7._MANAG_CHUNK_006", "NVDA_ITEM_7._MANAG_CHUNK_007"],
+    "question_type": "factual_numerical"
   },
   {
-    "id": "SEC-AAPL-2024-002",
+    "id": "SEC-NVDA-02",
+    "ticker": "NVDA",
+    "question": "Berapa margin kotor (gross margin) NVIDIA pada tahun fiskal 2024 dibandingkan fiskal 2023?",
+    "ground_truth_answer": "Gross margin NVIDIA meningkat dari 56.9% pada tahun fiskal 2023 menjadi 72.7% pada tahun fiskal 2024 (naik 15.8 poin persentase).",
+    "ground_truth_chunk_ids": ["NVDA_ITEM_7._MANAG_CHUNK_006", "NVDA_ITEM_7._MANAG_CHUNK_007"],
+    "question_type": "factual_numerical"
+  },
+  {
+    "id": "SEC-NVDA-03",
+    "ticker": "NVDA",
+    "question": "Apa risiko ketergantungan manufaktur NVIDIA terhadap TSMC dan kontrol ekspor ke pasar Tiongkok menurut Item 1A?",
+    "ground_truth_answer": "NVIDIA bergantung penuh pada TSMC untuk produksi wafer karena model fabless, dan regulasi lisensi ekspor AS membatasi penjualan GPU A100/H100 ke pelanggan di Tiongkok.",
+    "ground_truth_chunk_ids": ["NVDA_ITEM_1A._RISK_CHUNK_005"],
+    "question_type": "qualitative_risk"
+  },
+  {
+    "id": "SEC-AAPL-01",
     "ticker": "AAPL",
-    "fiscal_year": "2024",
-    "question": "Berapa persentase kontribusi margin kotor segmen Services Apple dibandingkan margin kotor produk hardware pada FY2024?",
-    "ground_truth_answer": "Margin kotor segmen Services Apple pada FY2024 tercatat sebesar 74.0%, jauh lebih tinggi dibandingkan margin kotor produk hardware yang berada di angka 36.7%.",
-    "ground_truth_chunk_ids": ["AAPL_2024_ITEM7_CHUNK_18"],
-    "question_type": "factual_numerical",
-    "expected_difficulty": "medium"
+    "question": "Berapa perbandingan margin kotor antara segmen Products dan Services Apple di tahun fiskal 2024?",
+    "ground_truth_answer": "Margin kotor segmen Services Apple adalah 74.0%, sedangkan margin kotor produk hardware (Products) adalah 36.7%.",
+    "ground_truth_chunk_ids": ["AAPL_ITEM_7._MANAG_CHUNK_002", "AAPL_ITEM_7._MANAG_CHUNK_003"],
+    "question_type": "factual_numerical"
   },
   {
-    "id": "SEC-COMP-2024-003",
+    "id": "SEC-AAPL-02",
+    "ticker": "AAPL",
+    "question": "Berapa total pendapatan produk iPhone Apple pada tahun fiskal 2024?",
+    "ground_truth_answer": "Pendapatan produk iPhone pada tahun fiskal 2024 adalah $201,183 juta, turun 1% dibandingkan $200,583 juta pada tahun 2023.",
+    "ground_truth_chunk_ids": ["AAPL_ITEM_7._MANAG_CHUNK_003"],
+    "question_type": "factual_numerical"
+  },
+  {
+    "id": "SEC-AAPL-03",
+    "ticker": "AAPL",
+    "question": "Gugatan hukum antimonopoli apa yang dihadapi Apple dari Departemen Kehakiman AS (DOJ) pada tahun 2024?",
+    "ground_truth_answer": "Pada Maret 2024, DOJ dan 16 jaksa agung negara bagian mengajukan gugatan antimonopoli sipil dengan tuduhan Apple memonopoli pasar ponsel pintar di bawah Section 2 Sherman Act.",
+    "ground_truth_chunk_ids": ["AAPL_ITEM_1A._RISK_CHUNK_001"],
+    "question_type": "qualitative_risk"
+  },
+  {
+    "id": "SEC-MSFT-01",
+    "ticker": "MSFT",
+    "question": "Berapa belanja modal (CapEx) Microsoft pada tahun fiskal 2024 dan apa alasan lonjakan 75% tersebut?",
+    "ground_truth_answer": "CapEx Microsoft melonjak 75% menjadi $55,700 juta (dari $31,900 juta pada 2023) untuk pembangunan infrastruktur data center cloud dan akselerator AI.",
+    "ground_truth_chunk_ids": ["MSFT_ITEM_7._MANAG_CHUNK_011", "MSFT_ITEM_7._MANAG_CHUNK_012"],
+    "question_type": "factual_numerical"
+  },
+  {
+    "id": "SEC-MSFT-02",
+    "ticker": "MSFT",
+    "question": "Berapa pertumbuhan pendapatan Azure Cloud Microsoft dan berapa kontribusi layanan AI terhadap pertumbuhan tersebut?",
+    "ground_truth_answer": "Pendapatan Azure dan layanan cloud lainnya tumbuh 30%, di mana layanan AI menyumbang sekitar 7 poin persentase dari total pertumbuhan Azure.",
+    "ground_truth_chunk_ids": ["MSFT_ITEM_7._MANAG_CHUNK_012"],
+    "question_type": "factual_numerical"
+  },
+  {
+    "id": "SEC-COMP-01",
     "ticker": "NVDA_vs_MSFT",
-    "fiscal_year": "2024",
-    "question": "Bandingkan komitmen belanja modal (CapEx) antara Microsoft dan NVIDIA di tahun fiskal 2024 untuk infrastruktur AI.",
-    "ground_truth_answer": "Microsoft menghabiskan sekitar $55.7 miliar untuk penambahan properti dan peralatan (CapEx) terutama untuk data center cloud dan AI, sedangkan NVIDIA beroperasi dengan model bisnis fabless dengan belanja modal fisik yang relatif jauh lebih kecil ($1.1 miliar).",
-    "ground_truth_chunk_ids": ["MSFT_2024_ITEM7_CHUNK_88", "NVDA_2024_ITEM7_CHUNK_55"],
-    "question_type": "multi_hop_comparative",
-    "expected_difficulty": "hard"
+    "question": "Bandingkan belanja modal (CapEx) antara Microsoft dan NVIDIA di tahun fiskal 2024.",
+    "ground_truth_answer": "CapEx Microsoft mencapai $55.7 miliar untuk data center cloud dan AI, sedangkan CapEx fisik NVIDIA hanya $1.141 miliar karena model bisnis fabless.",
+    "ground_truth_chunk_ids": ["MSFT_ITEM_7._MANAG_CHUNK_011", "NVDA_ITEM_7._MANAG_CHUNK_006"],
+    "question_type": "multi_hop_comparative"
   },
   {
-    "id": "SEC-RISK-2024-004",
+    "id": "SEC-COMP-02",
+    "ticker": "AAPL_vs_NVDA",
+    "question": "Bandingkan margin kotor keseluruhan (Gross Margin %) antara Apple dan NVIDIA di tahun fiskal 2024.",
+    "ground_truth_answer": "Total Gross Margin NVIDIA tercatat 72.7% (didorong margin Data Center tinggi), sedangkan total Gross Margin Apple adalah 46.2%.",
+    "ground_truth_chunk_ids": ["NVDA_ITEM_7._MANAG_CHUNK_006", "AAPL_ITEM_7._MANAG_CHUNK_002"],
+    "question_type": "multi_hop_comparative"
+  },
+  {
+    "id": "SEC-ADV-01",
     "ticker": "NVDA",
-    "fiscal_year": "2024",
-    "question": "Apa risiko utama yang dihadapi NVIDIA terkait kebijakan kontrol ekspor pemerintah Amerika Serikat ke pasar Tiongkok menurut Item 1A?",
-    "ground_truth_answer": "NVIDIA menyatakan bahwa pembatasan kontrol ekspor lisensi AS membatasi penjualan GPU arsitektur canggih (seperti A100/H100) ke pelanggan di Tiongkok, yang secara historis menyumbang persentase signifikan dari pendapatan bisnis Data Center mereka.",
-    "ground_truth_chunk_ids": ["NVDA_2024_ITEM1A_CHUNK_12"],
-    "question_type": "qualitative_risk",
-    "expected_difficulty": "medium"
+    "question": "Berapa dividen tunai per saham yang dibayarkan NVIDIA untuk kuartal pertama tahun 2030 menurut Form 10-K?",
+    "ground_truth_answer": "Informasi tidak tersedia di dalam laporan resmi SEC Form 10-K.",
+    "ground_truth_chunk_ids": [],
+    "question_type": "adversarial_unanswerable"
   },
   {
-    "id": "SEC-ADV-2024-005",
+    "id": "SEC-ADV-02",
     "ticker": "AAPL",
-    "fiscal_year": "2024",
-    "question": "Berapa target penjualan unit kendaraan listrik Apple Car yang direncanakan meluncur pada tahun 2026 menurut Item 1 laporan 10-K Apple?",
-    "ground_truth_answer": "Informasi tidak tersedia di dalam laporan 10-K. Apple tidak pernah mencantumkan target unit kendaraan listrik atau peluncuran Apple Car pada Item 1 laporan resmi 10-K FY2024.",
+    "question": "Berapa target volume produksi Apple Car listrik di tahun 2026 yang tercantum pada Item 1 laporan 10-K?",
+    "ground_truth_answer": "Informasi tidak tersedia di dalam laporan resmi SEC Form 10-K.",
     "ground_truth_chunk_ids": [],
-    "question_type": "adversarial_unanswerable",
-    "expected_difficulty": "adversarial"
+    "question_type": "adversarial_unanswerable"
   }
 ]
