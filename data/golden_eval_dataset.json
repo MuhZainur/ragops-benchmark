@@ -1,0 +1,52 @@
+[
+  {
+    "id": "SEC-NVDA-2024-001",
+    "ticker": "NVDA",
+    "fiscal_year": "2024",
+    "question": "Berapa total pendapatan segmen Compute & Networking NVIDIA pada tahun fiskal 2024, dan berapa persentase pertumbuhannya dibanding 2023?",
+    "ground_truth_answer": "Pendapatan segmen Compute & Networking NVIDIA pada tahun fiskal 2024 adalah $47,405 juta, tumbuh 217% dibandingkan dengan $15,068 juta pada tahun fiskal 2023.",
+    "ground_truth_chunk_ids": ["NVDA_2024_ITEM7_CHUNK_42"],
+    "question_type": "factual_numerical",
+    "expected_difficulty": "medium"
+  },
+  {
+    "id": "SEC-AAPL-2024-002",
+    "ticker": "AAPL",
+    "fiscal_year": "2024",
+    "question": "Berapa persentase kontribusi margin kotor segmen Services Apple dibandingkan margin kotor produk hardware pada FY2024?",
+    "ground_truth_answer": "Margin kotor segmen Services Apple pada FY2024 tercatat sebesar 74.0%, jauh lebih tinggi dibandingkan margin kotor produk hardware yang berada di angka 36.7%.",
+    "ground_truth_chunk_ids": ["AAPL_2024_ITEM7_CHUNK_18"],
+    "question_type": "factual_numerical",
+    "expected_difficulty": "medium"
+  },
+  {
+    "id": "SEC-COMP-2024-003",
+    "ticker": "NVDA_vs_MSFT",
+    "fiscal_year": "2024",
+    "question": "Bandingkan komitmen belanja modal (CapEx) antara Microsoft dan NVIDIA di tahun fiskal 2024 untuk infrastruktur AI.",
+    "ground_truth_answer": "Microsoft menghabiskan sekitar $55.7 miliar untuk penambahan properti dan peralatan (CapEx) terutama untuk data center cloud dan AI, sedangkan NVIDIA beroperasi dengan model bisnis fabless dengan belanja modal fisik yang relatif jauh lebih kecil ($1.1 miliar).",
+    "ground_truth_chunk_ids": ["MSFT_2024_ITEM7_CHUNK_88", "NVDA_2024_ITEM7_CHUNK_55"],
+    "question_type": "multi_hop_comparative",
+    "expected_difficulty": "hard"
+  },
+  {
+    "id": "SEC-RISK-2024-004",
+    "ticker": "NVDA",
+    "fiscal_year": "2024",
+    "question": "Apa risiko utama yang dihadapi NVIDIA terkait kebijakan kontrol ekspor pemerintah Amerika Serikat ke pasar Tiongkok menurut Item 1A?",
+    "ground_truth_answer": "NVIDIA menyatakan bahwa pembatasan kontrol ekspor lisensi AS membatasi penjualan GPU arsitektur canggih (seperti A100/H100) ke pelanggan di Tiongkok, yang secara historis menyumbang persentase signifikan dari pendapatan bisnis Data Center mereka.",
+    "ground_truth_chunk_ids": ["NVDA_2024_ITEM1A_CHUNK_12"],
+    "question_type": "qualitative_risk",
+    "expected_difficulty": "medium"
+  },
+  {
+    "id": "SEC-ADV-2024-005",
+    "ticker": "AAPL",
+    "fiscal_year": "2024",
+    "question": "Berapa target penjualan unit kendaraan listrik Apple Car yang direncanakan meluncur pada tahun 2026 menurut Item 1 laporan 10-K Apple?",
+    "ground_truth_answer": "Informasi tidak tersedia di dalam laporan 10-K. Apple tidak pernah mencantumkan target unit kendaraan listrik atau peluncuran Apple Car pada Item 1 laporan resmi 10-K FY2024.",
+    "ground_truth_chunk_ids": [],
+    "question_type": "adversarial_unanswerable",
+    "expected_difficulty": "adversarial"
+  }
+]
