@@ -79,6 +79,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Resilient Path Sanitizer: Collapses accidental double slashes (e.g. //api/query -> /api/query)
+@app.middleware("http")
+async def sanitize_path_middleware(request, call_next):
+    raw_path = request.scope.get("path", "")
+    if "//" in raw_path:
+        import re
+        request.scope["path"] = re.sub(r"/+", "/", raw_path)
+    return await call_next(request)
+
 # ---------------------------------------------------------
 # Sample Test Queries for Recruiters / Reviewers
 # ---------------------------------------------------------
