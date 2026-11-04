@@ -167,7 +167,7 @@ Results from the run saved in [`data/benchmark_results.json`](data/benchmark_res
 **How to read these results**
 
 - The corpus is very small, so retrieving 5 of 15 chunks makes high scores easy. These numbers do not show that naive retrieval is good on real filings.
-- The rerank configuration scored lowest here. It can drop candidates through a score threshold, which may explain the lower hit rate, but the cause has not been diagnosed.
+- The rerank configuration scored lowest here. These results predate commit `f690d26`, which removed the reranker's 0.35 score cutoff, and the benchmark has not been rerun since, so the effect of that fix is unknown.
 - Faithfulness, answer relevance, and cost are left out of this table. The script runs the LLM judge on only 4 of the 12 questions and fills the rest with fixed placeholder values.
 - The dashboard's `DEFAULT_BENCHMARK` in `api/app.py` is a hand-written fallback, used only if the results file is missing. It is not a measurement.
 
