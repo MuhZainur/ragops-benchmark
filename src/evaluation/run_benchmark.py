@@ -101,7 +101,7 @@ def run_comparative_benchmark():
                 r_score = judge.evaluate_answer_relevance(q, ans)
                 cost = estimate_query_cost(pt, ct)
             else:
-                # Empirical benchmark defaults based on architectural capability
+                # Fixed placeholders, not measurements: the LLM judge only runs on the sampled queries above
                 defaults = {
                     "naive": (0.72, 0.75, 0.00015),
                     "bm25": (0.84, 0.80, 0.00014),

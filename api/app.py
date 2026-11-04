@@ -134,7 +134,7 @@ SAMPLE_QUERIES = [
     }
 ]
 
-# Baseline quantitative metrics for immediate fallback
+# Hand-written placeholder for when data/benchmark_results.json is missing. Not measured.
 DEFAULT_BENCHMARK = {
     "timestamp": "2026-10-31T06:00:00Z",
     "dataset_size": 12,

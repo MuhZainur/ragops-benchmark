@@ -6,7 +6,7 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com)
 [![React](https://img.shields.io/badge/Frontend-React%20%2B%20Tailwind-61DAFB?style=for-the-badge&logo=react)](https://react.dev)
 
-> **A high-precision comparative retrieval platform benchmarking Naive, Hybrid (BM25 + Dense RRF), HyDE, and Hierarchical Parent-Document architectures over official SEC Form 10-K financial filings, quantitatively evaluated via the RAG Triad (Ragas / TruLens).**
+> **A comparative retrieval platform benchmarking Naive, BM25, Hybrid (BM25 + Dense RRF), cross-encoder rerank, HyDE, and Hierarchical Parent-Document strategies over excerpts from SEC Form 10-K filings, on a small golden dataset.**
 
 ---
 
@@ -98,7 +98,7 @@ flowchart TD
 * **Characteristics:** Fast and low-cost, but prone to high hallucination rates on multi-hop numeric questions and footnote legal clauses.
 
 ### 2. Paradigm 2: Advanced Hybrid + Re-Ranking (Industry Standard)
-* **Strategy:** Dual retrieval combining **Sparse BM25** (exact lexical keyword matching) and **Dense Semantic Embeddings**. Results are merged via **Reciprocal Rank Fusion (RRF)**, then re-scored using **FlashRank** (a lightweight Cross-Encoder running on CPU with $<20\text{ms}$ latency).
+* **Strategy:** Dual retrieval combining **Sparse BM25** (exact lexical keyword matching) and **Dense Semantic Embeddings**. Results are merged via **Reciprocal Rank Fusion (RRF)**, then re-scored using **FlashRank** (a lightweight Cross-Encoder that runs on CPU).
 * **Strength:** Captures conceptual semantics while preserving exact financial numbers, note references, and accounting classifications.
 
 ### 3. Paradigm 3: Query Transformation (HyDE)
@@ -153,20 +153,23 @@ Cross-Encoder (Precision Re-Ranking via FlashRank):
 
 ### Quantitative Performance Comparison
 
-Evaluated on a human-curated golden dataset of 50 complex financial questions across NVIDIA (NVDA), Apple (AAPL), and Microsoft (MSFT) FY2023–FY2024 Form 10-K filings:
+Results from the run saved in [`data/benchmark_results.json`](data/benchmark_results.json), produced by `src/evaluation/run_benchmark.py` on 12 questions and a 15-chunk corpus of NVIDIA (NVDA), Apple (AAPL), and Microsoft (MSFT) FY2024 10-K excerpts:
 
-| Metric / Architecture | 1. Naive RAG | 2. Hybrid + Re-Ranker | 3. HyDE | 4. Hierarchical Parent |
+| Strategy | Context Precision | MRR@5 | Hit Rate@5 | Retrieval P95 |
 | :--- | :---: | :---: | :---: | :---: |
-| **Faithfulness (Anti-Hallucination)** | 0.68 | **0.96** | 0.89 | 0.94 |
-| **Context Precision** | 0.52 | **0.89** | 0.74 | 0.82 |
-| **Context Recall** | 0.61 | **0.93** | 0.81 | 0.91 |
-| **Answer Relevance** | 0.71 | **0.95** | 0.92 | 0.93 |
-| **Mean Reciprocal Rank (MRR@5)** | 0.48 | **0.87** | 0.72 | 0.84 |
-| **Hit Rate @ 3** | 62.0% | **94.0%** | 82.0% | 90.0% |
-| **Retrieval Latency (P95)** | **12 ms** | 38 ms | 145 ms | 28 ms |
-| **End-to-End Latency (P95)** | **1.2 s** | 1.4 s | 2.8 s | 1.5 s |
+| Naive (dense) | 1.000 | 1.000 | 1.000 | 2,023 ms |
+| BM25 | 0.743 | 0.750 | 1.000 | 1.8 ms |
+| Hybrid RRF | 0.944 | 0.958 | 1.000 | 2,121 ms |
+| Hybrid + FlashRank rerank | 0.542 | 0.542 | 0.667 | 1,660 ms |
+| HyDE | 1.000 | 1.000 | 1.000 | 72,441 ms |
+| Hierarchical | 0.986 | 1.000 | 1.000 | 5,996 ms |
 
-> **Key Finding:** Hybrid Search combined with FlashRank Cross-Encoder re-ranking achieves a **+37% increase in Context Precision** and boosts **MRR@5 from 0.48 to 0.87** with only 26ms of additional CPU latency.
+**How to read these results**
+
+- The corpus is very small, so retrieving 5 of 15 chunks makes high scores easy. These numbers do not show that naive retrieval is good on real filings.
+- The rerank configuration scored lowest here. It can drop candidates through a score threshold, which may explain the lower hit rate, but the cause has not been diagnosed.
+- Faithfulness, answer relevance, and cost are left out of this table. The script runs the LLM judge on only 4 of the 12 questions and fills the rest with fixed placeholder values.
+- The dashboard's `DEFAULT_BENCHMARK` in `api/app.py` is a hand-written fallback, used only if the results file is missing. It is not a measurement.
 
 ---
 
@@ -192,7 +195,7 @@ sequenceDiagram
     API->>LLM: Send Grounded Prompt (Context + Instructions)
     LLM-->>API: Return Synthesized Answer with Footnote Citations
     API->>Eval: Compute Faithfulness & Relevance Scores
-    Eval-->>API: Return Evaluation Metrics (Faithfulness: 1.0, MRR: 1.0)
+    Eval-->>API: Return Evaluation Metrics
     API-->>UI: Deliver Answer + Chunk Traces + Radar Metrics
     UI-->>User: Render Interactive Side-by-Side Comparison & Charts
 ```
@@ -235,7 +238,8 @@ RAG_Project/
 │   └── vite.config.js
 ├── data/
 │   ├── corpus/                # SEC 10-K Markdown filings (NVDA, AAPL, MSFT)
-│   └── benchmark/             # Golden evaluation dataset (50 curated QA pairs)
+│   ├── golden_eval_dataset.json # Golden evaluation dataset (12 QA pairs)
+│   └── benchmark_results.json # Saved benchmark output
 ├── Dockerfile                 # Multi-stage production container build
 ├── requirements.txt           # Python backend dependencies
 └── README.md
@@ -293,12 +297,11 @@ PROJ_RAGOPS = {
     "title": "RAG-Ops: Enterprise Multi-Strategy Retrieval Engine & Quantitative Benchmark",
     "demo_url": "https://ragops-benchmark.vercel.app/",
     "api_url": "https://ragops-benchmark.onrender.com",
-    "tech_stack": ["FastAPI", "React", "BM25", "FlashRank", "RRF", "Ragas", "DeepSeek", "Docker"],
+    "tech_stack": ["FastAPI", "React", "BM25", "FlashRank", "RRF", "DeepSeek", "Docker"],
     "bullets": [
-        "Architected an enterprise comparative RAG engine benchmarking Naive, Hybrid (BM25 + Dense RRF), HyDE, and Hierarchical Parent-Document retrieval over SEC 10-K financial filings.",
-        "Integrated FlashRank Cross-Encoder re-ranking, boosting Context Precision by +37% and Mean Reciprocal Rank (MRR@5) from 0.48 to 0.87 with under 26ms CPU overhead.",
-        "Implemented an automated Evaluation-Driven Development (EDD) pipeline using Ragas to quantitatively assess Faithfulness, Context Recall, and Answer Relevance across a 50-pair golden dataset.",
-        "Engineered and deployed a dual-service architecture on Render and Vercel featuring an interactive A/B testing arena and real-time chunk rank movement visualizer."
+        "Built a RAG benchmark comparing six retrieval strategies over SEC 10-K excerpts.",
+        "Measured context precision, MRR@5, hit rate, and retrieval latency on a 12-question golden set.",
+        "Deployed a FastAPI backend on Render and a React dashboard on Vercel."
     ]
 }
 ```
